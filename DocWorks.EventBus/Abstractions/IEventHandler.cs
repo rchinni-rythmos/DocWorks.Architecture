@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DocWorks.BuildingBlocks.EventBus.Abstractions
 {
-    public interface ISedaEventHandler<in TEventHandlerInput>
+    public interface IEventHandler<in TEventHandlerInput>
         where TEventHandlerInput : EventHandlerInput
     {
-        Task<EventTypeResponseSuccessPayLoad> Handle(TEventHandlerInput eventHandlerInput);
+        Task<ExpandoObject> Handle(TEventHandlerInput eventHandlerInput);
     }
 }

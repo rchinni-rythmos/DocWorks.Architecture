@@ -2,6 +2,7 @@
 using DocWorks.BuildingBlocks.EventBus.Events;
 using DocWorks.BuildingBlocks.EventBus.Model;
 using DocWorks.GDocFactory.Services;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -10,19 +11,20 @@ using System.Threading.Tasks;
 
 namespace DocWorks.GDocFactory.EventHandlers
 {
-    class GDriveCreateProjectEventHandler : ISedaEventHandler<EventHandlerInput>
+    class GDriveCreateProjectEventHandler : IEventHandler<EventHandlerInput>
     {
         private readonly IGDriveClient _gdriveClient;
-        public GDriveCreateProjectEventHandler(IGDriveClient gdriveClient)
+        private readonly ILogger _logger;
+        public GDriveCreateProjectEventHandler(IGDriveClient gdriveClient, ILogger logger)
         {
             this._gdriveClient = gdriveClient;
+            this._logger = logger;
         }
         public async Task<ExpandoObject> Handle(EventHandlerInput eventHandlerInput)
         {
-            
-
+            dynamic response = new ExpandoObject();
+            response.GDriveProjectFolderID = this._gdriveClient.CreateFolder();
             await Task.Yield();
-
             return response;
         }
     }
