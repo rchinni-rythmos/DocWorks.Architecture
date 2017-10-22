@@ -1,0 +1,30 @@
+﻿{
+  "CMSOperation": "CreateProject",
+  "NotificationType": "Broadcast",
+  "NotificationTopic": "Project",
+  "Map": [
+    [ 1 ],
+    [ 2 ],
+    [ 3 ]
+  ],
+  "Events": [
+    {
+      "To": "Core",
+      "ApiOperation": "CreateProject",
+      "Index": 1,
+      "Status": "None"
+    },
+    {
+      "To": "GDrive",
+      "ApiOperation": "CreateProject",
+      "Index": 2,
+      "Status": "None"
+    },
+    {
+      "To": "Core",
+      "ApiOperation": "SetProjectComplete",
+      "Index": 3,
+      "Status": "None"
+    }
+  ]
+}

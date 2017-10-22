@@ -1,8 +1,8 @@
 ﻿using DocWorks.BuildingBlocks.ErrorHandling.Model;
-using DocWorks.BuildingBlocks.EventBus.Abstractions;
-using DocWorks.BuildingBlocks.EventBus.Configuration;
-using DocWorks.BuildingBlocks.EventBus.Enumerations;
-using DocWorks.BuildingBlocks.EventBus.Model;
+using DocWorks.BuildingBlocks.Global.Abstractions;
+using DocWorks.BuildingBlocks.Global.Configuration;
+using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.BuildingBlocks.Global.Model;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -12,9 +12,9 @@ using System.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocWorks.BuildingBlocks.EventBus.Implementation
+namespace DocWorks.BuildingBlocks.Global.Implementation
 {
-    class DefaultEventBusServiceBusMessageProcessor : IEventBusMessageProcessor
+    public class DefaultEventBusServiceBusMessageProcessor : IEventBusMessageProcessor
     {
         private readonly IEventHandlerRegistry _eventHandlerRegistry;
         private readonly ILogger _logger;
@@ -30,7 +30,7 @@ namespace DocWorks.BuildingBlocks.EventBus.Implementation
             this._messagePublisher = messagePublisher;
         }
 
-        public async Task ProcessMessage(Message message)
+        public async Task ProcessMessageAsync(Message message)
         {
             SedaEvent sedaEvent = new SedaEvent();
             sedaEvent.ResponseId = message.CorrelationId;

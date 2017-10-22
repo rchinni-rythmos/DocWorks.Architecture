@@ -1,6 +1,6 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
-using DocWorks.BuildingBlocks.EventBus.Events;
-using DocWorks.BuildingBlocks.EventBus.Model;
+﻿using DocWorks.BuildingBlocks.Global.Abstractions;
+using DocWorks.BuildingBlocks.Global.Events;
+using DocWorks.BuildingBlocks.Global.Model;
 using DocWorks.GDocFactory.Services;
 using Microsoft.Extensions.Logging;
 using System;

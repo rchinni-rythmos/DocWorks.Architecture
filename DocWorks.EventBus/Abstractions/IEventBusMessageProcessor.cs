@@ -1,14 +1,14 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Model;
+﻿using DocWorks.BuildingBlocks.Global.Model;
 using Microsoft.Azure.ServiceBus;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocWorks.BuildingBlocks.EventBus.Abstractions
+namespace DocWorks.BuildingBlocks.Global.Abstractions
 {
     public interface IEventBusMessageProcessor
     {
-        Task ProcessMessage(Message message);
+        Task ProcessMessageAsync(Message message);
     }
 }

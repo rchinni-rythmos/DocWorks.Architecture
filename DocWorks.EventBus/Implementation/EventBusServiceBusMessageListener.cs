@@ -1,15 +1,7 @@
-﻿using DocWorks.BuildingBlocks.ErrorHandling.Model;
-using DocWorks.BuildingBlocks.EventBus.Abstractions;
+﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
 using DocWorks.BuildingBlocks.EventBus.Configuration;
-using DocWorks.BuildingBlocks.EventBus.Enumerations;
-using DocWorks.BuildingBlocks.EventBus.Model;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DocWorks.BuildingBlocks.EventBus.Implementation
@@ -43,9 +35,7 @@ namespace DocWorks.BuildingBlocks.EventBus.Implementation
             _subscriptionClient.RegisterMessageHandler(
                 async (message, token) =>
                 {
-                    
-
-                    await this._messageProcessor.ProcessMessage(message);
+                    await this._messageProcessor.ProcessMessageAsync(message);
                     // Complete the message so that it is not received again.
                     await _subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
                 },

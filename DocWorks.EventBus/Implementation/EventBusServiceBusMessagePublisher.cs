@@ -1,17 +1,17 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
+﻿using DocWorks.BuildingBlocks.Global.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using DocWorks.BuildingBlocks.EventBus.Model;
+using DocWorks.BuildingBlocks.Global.Model;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using DocWorks.BuildingBlocks.EventBus.Configuration;
+using DocWorks.BuildingBlocks.Global.Configuration;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 
-namespace DocWorks.BuildingBlocks.EventBus.Implementation
+namespace DocWorks.BuildingBlocks.Global.Implementation
 {
-    class EventBusServiceBusMessagePublisher : IEventBusMessagePublisher
+    public class EventBusServiceBusMessagePublisher : IEventBusMessagePublisher
     {
         private readonly ITopicClient _topicClient;
         private readonly AzureServiceBusSettings _azureServiceBusSettings;

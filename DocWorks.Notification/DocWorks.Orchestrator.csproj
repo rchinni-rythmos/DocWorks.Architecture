@@ -17,13 +17,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocWorks.BuildingBlocks.ErrorHandling\DocWorks.BuildingBlocks.ErrorHandling.csproj" />
+    <ProjectReference Include="..\DocWorks.BuildingBlocks.Notification\DocWorks.BuildingBlocks.Notification.csproj" />
     <ProjectReference Include="..\DocWorks.DataAccess\DocWorks.BuildingBlocks.DataAccess.csproj" />
     <ProjectReference Include="..\DocWorks.EventBus\DocWorks.BuildingBlocks.EventBus.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EventHandlers\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,16 @@
+﻿{
+  "CMSOperation": "GetProjects",
+  "NotificationType": "Targeted",
+  "NotificationTopic": "NA",
+  "Map": [
+    [ 1 ]
+  ],
+  "Events": [
+    {
+      "To": "Core",
+      "ApiOperation": "GetProjects",
+      "Index": 1,
+      "Status": "None"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DocWorks.BuildingBlocks.EventBus.Configuration
+namespace DocWorks.BuildingBlocks.Global.Configuration
 {
     public class AzureServiceBusSettings
     {

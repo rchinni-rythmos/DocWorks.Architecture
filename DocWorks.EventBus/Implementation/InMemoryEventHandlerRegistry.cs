@@ -1,10 +1,10 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
+﻿using DocWorks.BuildingBlocks.Global.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using DocWorks.BuildingBlocks.EventBus.Enumerations;
+using DocWorks.BuildingBlocks.Global.Enumerations;
 
-namespace DocWorks.BuildingBlocks.EventBus.Implementation
+namespace DocWorks.BuildingBlocks.Global.Implementation
 {
     public class InMemoryEventHandlerRegistry : IEventHandlerRegistry
     {

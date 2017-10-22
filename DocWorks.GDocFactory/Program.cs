@@ -1,7 +1,7 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
-using DocWorks.BuildingBlocks.EventBus.Configuration;
-using DocWorks.BuildingBlocks.EventBus.Enumerations;
-using DocWorks.BuildingBlocks.EventBus.Implementation;
+﻿using DocWorks.BuildingBlocks.Global.Abstractions;
+using DocWorks.BuildingBlocks.Global.Configuration;
+using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.BuildingBlocks.Global.Implementation;
 using DocWorks.GDocFactory.EventHandlers;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Configuration;
@@ -32,17 +32,24 @@ namespace DocWorks.GDocFactory
 
             #region Setup DI
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton<IEventHandlerRegistry, InMemoryEventHandlerRegistry>();
+
+            // EventBus
             serviceCollection.AddSingleton(azureServiceBusSettings);
-            serviceCollection.AddSingleton<IEventBus, EventBusServiceBusMessageListener>();
+            serviceCollection.AddSingleton<IEventHandlerRegistry, InMemoryEventHandlerRegistry>();
+            serviceCollection.AddSingleton<IEventBusMessageListener, EventBusServiceBusMessageListener>();
+            serviceCollection.AddSingleton<IEventBusMessageProcessor, DefaultEventBusServiceBusMessageProcessor>();
+            serviceCollection.AddSingleton<IEventBusMessagePublisher, EventBusServiceBusMessagePublisher>();
+
+            // Event Handlers
             serviceCollection.AddTransient<GDriveCreateProjectEventHandler>();
+
             var serviceProvider = serviceCollection.BuildServiceProvider();
             #endregion
 
             RegisterEventHandlers(serviceProvider);
 
             // Start listening for Events
-            serviceProvider.GetService<IEventBus>().RegisterEventListener();
+            serviceProvider.GetService<IEventBusMessageListener>().RegisterEventListener();
 
             // Azure WebJobs SDK .Net Core 2.0 is in Beta with no firm release dates.
             // So, cannot use the ServiceBus Triggers part of the SDK.

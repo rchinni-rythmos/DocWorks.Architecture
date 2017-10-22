@@ -1,7 +1,14 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
-using DocWorks.BuildingBlocks.EventBus.Configuration;
-using DocWorks.BuildingBlocks.EventBus.Enumerations;
-using DocWorks.BuildingBlocks.EventBus.Implementation;
+﻿using DocWorks.BuildingBlocks.DataAccess.Abstractions.Repository;
+using DocWorks.BuildingBlocks.DataAccess.Configuration;
+using DocWorks.BuildingBlocks.DataAccess.Implementation.Repository;
+using DocWorks.BuildingBlocks.Global.Abstractions;
+using DocWorks.BuildingBlocks.Global.Configuration;
+using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.BuildingBlocks.Global.Implementation;
+using DocWorks.BuildingBlocks.Notification.Abstractions;
+using DocWorks.BuildingBlocks.Notification.Configuration;
+using DocWorks.BuildingBlocks.Notification.Implementation;
+using DocWorks.Notification.EventBus;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +31,12 @@ namespace DocWorks.Notification
             var azureServiceBusSettings = new AzureServiceBusSettings();
             configuration.GetSection(nameof(AzureServiceBusSettings)).Bind(azureServiceBusSettings);
 
+            var mongoDBSettings = new MongoDBSettings();
+            configuration.GetSection(nameof(MongoDBSettings)).Bind(mongoDBSettings);
+
+            FcmAppSettings fcmAppSettings = new FcmAppSettings();
+            configuration.GetSection(nameof(FcmAppSettings)).Bind(fcmAppSettings);
+
             // Required by WebJobs SDK
             Environment.SetEnvironmentVariable("AzureWebJobsStorage", configuration.GetValue<string>("AzureWebJobsStorage") );
             Environment.SetEnvironmentVariable("AzureWebJobsDashboard", configuration.GetValue<string>("AzureWebJobsDashboard"));
@@ -31,26 +44,33 @@ namespace DocWorks.Notification
 
             #region Setup DI
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton<IEventHandlerRegistry, InMemoryEventHandlerRegistry>();
+
+            // EventBus
             serviceCollection.AddSingleton(azureServiceBusSettings);
-            serviceCollection.AddSingleton<IEventBus, EventBusServiceBusMessageListener>();
-            //serviceCollection.AddTransient<GDriveCreateProjectEventHandler>();
+
+            serviceCollection.AddSingleton<IEventBusMessageListener, EventBusServiceBusMessageListener>();
+            serviceCollection.AddSingleton<IEventBusMessageProcessor, OrchestratorEventBusServiceBusMessageProcessor>();
+            serviceCollection.AddSingleton<IEventBusMessagePublisher, EventBusServiceBusMessagePublisher>();
+
+            // DB
+            serviceCollection.AddSingleton(mongoDBSettings);
+            serviceCollection.AddSingleton<IResponseRepository, ResponseRepository>();
+
+            // Notification
+            serviceCollection.AddSingleton(fcmAppSettings);
+            serviceCollection.AddSingleton<INotificationService, FcmNotificationService>();
+
+            // Event Handlers
+            // None for Notification
+
             var serviceProvider = serviceCollection.BuildServiceProvider();
             #endregion
 
-            RegisterEventHandlers(serviceProvider);
-
             // Start listening for Events
-            serviceProvider.GetService<IEventBus>().RegisterEventListener();
+            serviceProvider.GetService<IEventBusMessageListener>().RegisterEventListener();
 
             var host = new JobHost();
             host.RunAndBlock();
-        }
-
-        private static void RegisterEventHandlers(ServiceProvider serviceProvider)
-        {
-            var eventHandlerRegistry = serviceProvider.GetService<IEventHandlerRegistry>();
-            //eventHandlerRegistry.AddEventHandler(EventName.GDriveCreateProject, typeof(GDriveCreateProjectEventHandler));
         }
     }
 }
