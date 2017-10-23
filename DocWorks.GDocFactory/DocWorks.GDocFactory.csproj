@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.29.2" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.29.2.1016" />
     <PackageReference Include="Microsoft.Azure.WebJobs" Version="3.0.0-beta3" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0" />
@@ -17,7 +19,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocWorks.BuildingBlocks.ErrorHandling\DocWorks.BuildingBlocks.ErrorHandling.csproj" />
+    <ProjectReference Include="..\DocWorks.DataAccess\DocWorks.BuildingBlocks.DataAccess.csproj" />
     <ProjectReference Include="..\DocWorks.EventBus\DocWorks.BuildingBlocks.EventBus.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="Entity\" />
+    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

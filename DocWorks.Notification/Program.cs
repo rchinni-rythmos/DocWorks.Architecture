@@ -49,7 +49,7 @@ namespace DocWorks.Notification
             serviceCollection.AddSingleton(azureServiceBusSettings);
 
             serviceCollection.AddSingleton<IEventBusMessageListener, EventBusServiceBusMessageListener>();
-            serviceCollection.AddSingleton<IEventBusMessageProcessor, OrchestratorEventBusServiceBusMessageProcessor>();
+            serviceCollection.AddTransient<IEventBusMessageProcessor, OrchestratorEventBusServiceBusMessageProcessor>();
             serviceCollection.AddSingleton<IEventBusMessagePublisher, EventBusServiceBusMessagePublisher>();
 
             // DB

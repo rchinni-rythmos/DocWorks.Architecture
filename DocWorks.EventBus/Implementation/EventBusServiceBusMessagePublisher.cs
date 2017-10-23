@@ -9,7 +9,7 @@ using DocWorks.BuildingBlocks.Global.Configuration;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 
-namespace DocWorks.BuildingBlocks.Global.Implementation
+namespace DocWorks.BuildingBlocks.EventBus.Implementation
 {
     public class EventBusServiceBusMessagePublisher : IEventBusMessagePublisher
     {

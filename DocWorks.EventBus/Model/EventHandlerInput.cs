@@ -1,9 +1,4 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Events;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DocWorks.BuildingBlocks.EventBus.Model
+﻿namespace DocWorks.BuildingBlocks.EventBus.Model
 {
     public class EventHandlerInput
     {

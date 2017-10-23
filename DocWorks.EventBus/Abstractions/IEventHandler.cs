@@ -1,8 +1,4 @@
-﻿using DocWorks.BuildingBlocks.Global.Model;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
+﻿using DocWorks.BuildingBlocks.EventBus.Model;
 using System.Threading.Tasks;
 
 namespace DocWorks.BuildingBlocks.Global.Abstractions
@@ -10,6 +6,6 @@ namespace DocWorks.BuildingBlocks.Global.Abstractions
     public interface IEventHandler<in TEventHandlerInput>
         where TEventHandlerInput : EventHandlerInput
     {
-        Task<ExpandoObject> Handle(TEventHandlerInput eventHandlerInput);
+        Task<dynamic> Handle(TEventHandlerInput eventHandlerInput);
     }
 }

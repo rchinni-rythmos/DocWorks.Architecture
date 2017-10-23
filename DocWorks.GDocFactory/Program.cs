@@ -2,6 +2,7 @@
 using DocWorks.BuildingBlocks.Global.Configuration;
 using DocWorks.BuildingBlocks.Global.Enumerations;
 using DocWorks.BuildingBlocks.Global.Implementation;
+using DocWorks.GDocFactory.Configuration;
 using DocWorks.GDocFactory.EventHandlers;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,9 @@ namespace DocWorks.GDocFactory
             var azureServiceBusSettings = new AzureServiceBusSettings();
             configuration.GetSection(nameof(AzureServiceBusSettings)).Bind(azureServiceBusSettings);
 
+            var gdriveFactorySettings = new GDriveFactoryAppSettings();
+            configuration.GetSection(nameof(GDriveFactoryAppSettings)).Bind(gdriveFactorySettings);
+
             // Required by WebJobs SDK
             Environment.SetEnvironmentVariable("AzureWebJobsStorage", configuration.GetValue<string>("AzureWebJobsStorage"));
             Environment.SetEnvironmentVariable("AzureWebJobsDashboard", configuration.GetValue<string>("AzureWebJobsDashboard"));
@@ -33,11 +37,14 @@ namespace DocWorks.GDocFactory
             #region Setup DI
             var serviceCollection = new ServiceCollection();
 
+            // GDrive
+            serviceCollection.AddSingleton(gdriveFactorySettings);
+
             // EventBus
             serviceCollection.AddSingleton(azureServiceBusSettings);
             serviceCollection.AddSingleton<IEventHandlerRegistry, InMemoryEventHandlerRegistry>();
             serviceCollection.AddSingleton<IEventBusMessageListener, EventBusServiceBusMessageListener>();
-            serviceCollection.AddSingleton<IEventBusMessageProcessor, DefaultEventBusServiceBusMessageProcessor>();
+            serviceCollection.AddTransient<IEventBusMessageProcessor, DefaultEventBusServiceBusMessageProcessor>();
             serviceCollection.AddSingleton<IEventBusMessagePublisher, EventBusServiceBusMessagePublisher>();
 
             // Event Handlers
