@@ -1,9 +1,10 @@
 ﻿using DocWorks.BuildingBlocks.DataAccess.Attributes;
+using DocWorks.BuildingBlocks.DataAccess.Entity;
 using DocWorks.BuildingBlocks.ErrorHandling.Model;
 using System;
 using System.Dynamic;
 
-namespace DocWorks.BuildingBlocks.DataAccess.Entity
+namespace DocWorks.DataAccess.Common.Entity
 {
     [CollectionName("Response")]
     public class Response : BaseEntity

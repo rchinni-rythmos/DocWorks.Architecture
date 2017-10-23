@@ -1,10 +1,5 @@
-﻿using DocWorks.BuildingBlocks.ErrorHandling.Model;
-using DocWorks.BuildingBlocks.EventBus.Enumerations;
+﻿using DocWorks.BuildingBlocks.EventBus.Enumerations;
 using DocWorks.BuildingBlocks.Global.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
 
 namespace DocWorks.BuildingBlocks.EventBus.Model
 {
@@ -20,6 +15,4 @@ namespace DocWorks.BuildingBlocks.EventBus.Model
         public int EventIndexInFlowMap { get; set; }
         public CmsOperation CmsOperation { get; set; }
     }
-
-    
 }

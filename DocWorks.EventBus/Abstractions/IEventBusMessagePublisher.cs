@@ -1,10 +1,11 @@
-﻿using DocWorks.BuildingBlocks.Global.Model;
+﻿using DocWorks.BuildingBlocks.EventBus.Model;
+using DocWorks.BuildingBlocks.Global.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocWorks.BuildingBlocks.Global.Abstractions
+namespace DocWorks.BuildingBlocks.EventBus.Abstractions
 {
     public interface IEventBusMessagePublisher
     {

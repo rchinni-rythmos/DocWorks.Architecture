@@ -35,17 +35,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{C364A265-659
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocWorks.WebUI", "DocWorks.WebUI\DocWorks.WebUI.csproj", "{34322C41-D8CA-422F-9CE2-3F6F9616C9EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocWorks.SourceSync", "DocWorks.SourceSync\DocWorks.SourceSync.csproj", "{0BDCDD75-79EA-43CC-8A5A-F15CB92A441E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocWorks.SourceSync", "DocWorks.SourceSync\DocWorks.SourceSync.csproj", "{0BDCDD75-79EA-43CC-8A5A-F15CB92A441E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocWorks.Core", "DocWorks.Core\DocWorks.Core.csproj", "{6FB01758-A1C6-4D44-BC6E-6848D0B00EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocWorks.Core", "DocWorks.Core\DocWorks.Core.csproj", "{6FB01758-A1C6-4D44-BC6E-6848D0B00EAE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{808D3821-5055-4B67-8BED-1105E8D74295}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocWorks.BuildingBlocks.Notification", "DocWorks.BuildingBlocks.Notification\DocWorks.BuildingBlocks.Notification.csproj", "{4F6B630E-01EC-416C-8B8A-0DF9F6305D42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocWorks.BuildingBlocks.Notification", "DocWorks.BuildingBlocks.Notification\DocWorks.BuildingBlocks.Notification.csproj", "{4F6B630E-01EC-416C-8B8A-0DF9F6305D42}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global", "Global", "{67495BFC-359D-4386-96E3-8823FC8F2B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocWorks.BuildingBlocks.Global", "DocWorks.BuildingBlocks.Global\DocWorks.BuildingBlocks.Global.csproj", "{ABD6E715-1394-49D4-A935-EF42F8D581C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocWorks.BuildingBlocks.Global", "DocWorks.BuildingBlocks.Global\DocWorks.BuildingBlocks.Global.csproj", "{ABD6E715-1394-49D4-A935-EF42F8D581C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{4D5042AC-18D7-436E-A70D-8112056EEF4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{57A7C9C6-B21E-46E1-8AEF-4920B6B10CCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocWorks.DataAccess.Common", "DocWorks.DataAccess.Common\DocWorks.DataAccess.Common.csproj", "{821AC364-EC1D-41FD-B977-58A3DE945A8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +107,10 @@ Global
 		{ABD6E715-1394-49D4-A935-EF42F8D581C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABD6E715-1394-49D4-A935-EF42F8D581C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABD6E715-1394-49D4-A935-EF42F8D581C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821AC364-EC1D-41FD-B977-58A3DE945A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821AC364-EC1D-41FD-B977-58A3DE945A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821AC364-EC1D-41FD-B977-58A3DE945A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821AC364-EC1D-41FD-B977-58A3DE945A8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +133,8 @@ Global
 		{4F6B630E-01EC-416C-8B8A-0DF9F6305D42} = {808D3821-5055-4B67-8BED-1105E8D74295}
 		{67495BFC-359D-4386-96E3-8823FC8F2B6D} = {272E1A1E-2DEB-45D0-9780-A6A61B59E63F}
 		{ABD6E715-1394-49D4-A935-EF42F8D581C1} = {67495BFC-359D-4386-96E3-8823FC8F2B6D}
+		{57A7C9C6-B21E-46E1-8AEF-4920B6B10CCB} = {4D5042AC-18D7-436E-A70D-8112056EEF4D}
+		{821AC364-EC1D-41FD-B977-58A3DE945A8A} = {57A7C9C6-B21E-46E1-8AEF-4920B6B10CCB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECB85E1-68F5-4E6C-B9B6-2A48DE9448C7}

@@ -9,16 +9,10 @@
     <Folder Include="Configuration\" />
     <Folder Include="Implementation\Repository\" />
     <Folder Include="Attributes\" />
-    <Folder Include="Indexes\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.4.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DocWorks.BuildingBlocks.ErrorHandling\DocWorks.BuildingBlocks.ErrorHandling.csproj" />
-    <ProjectReference Include="..\DocWorks.BuildingBlocks.Global\DocWorks.BuildingBlocks.Global.csproj" />
   </ItemGroup>
 
 </Project>

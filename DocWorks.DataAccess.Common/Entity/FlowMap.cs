@@ -1,21 +1,24 @@
 ﻿using DocWorks.BuildingBlocks.DataAccess.Attributes;
+using DocWorks.BuildingBlocks.DataAccess.Entity;
+using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.BuildingBlocks.Global.Model;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DocWorks.BuildingBlocks.DataAccess.Entity
+namespace DocWorks.DataAccess.Common.Entity
 {
     [CollectionName("FlowMap")]
     public class FlowMap : BaseEntity
     {
-        public CMSOperation CMSOperation { get; set; }
+        public CmsOperation CMSOperation { get; set; }
         public List<List<int>> Map { get; set; }
-        public List<CMSEvent> Events { get; set; }
+        public List<FlowMapEvent> Events { get; set; }
         public NotificationType NotificationType { get; set; }
         public NotificationTopic NotificationTopic { get; set; }
 
-        public List<CMSEvent> GetNextSetofEvents(int eventIndex)
+        public List<FlowMapEvent> GetNextSetofEvents(int eventIndex)
         {
-            var eventList = new List<CMSEvent>();
+            var eventList = new List<FlowMapEvent>();
 
             if (this.Map.Count >= 0)
             {
@@ -59,7 +62,7 @@ namespace DocWorks.BuildingBlocks.DataAccess.Entity
         /// </summary>
         public bool IsOperationComplete { get {
                 // if any of the operations are not in success state, then the operation is not complete
-                return ! this.Events.Any(x => x.Status != CMSEventStatus.Success);
+                return ! this.Events.Any(x => x.Status != EventStatus.Success);
             }
         }
 
@@ -84,7 +87,7 @@ namespace DocWorks.BuildingBlocks.DataAccess.Entity
             {
                 var et = this.Events.Find(x => x.Index == ei);
 
-                if (et.Status != CMSEventStatus.Success) return false;
+                if (et.Status != EventStatus.Success) return false;
             }
 
             return true;

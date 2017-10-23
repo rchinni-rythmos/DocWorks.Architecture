@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DocWorks.BuildingBlocks.Global.Abstractions
+﻿namespace DocWorks.BuildingBlocks.EventBus.Abstractions
 {
     public interface IEventBusMessageListener
     {

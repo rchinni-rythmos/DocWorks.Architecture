@@ -1,13 +1,12 @@
-﻿using DocWorks.BuildingBlocks.Global.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using DocWorks.BuildingBlocks.Global.Model;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using DocWorks.BuildingBlocks.Global.Configuration;
+﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
+using DocWorks.BuildingBlocks.EventBus.Configuration;
+using DocWorks.BuildingBlocks.EventBus.Model;
 using Microsoft.Azure.ServiceBus;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DocWorks.BuildingBlocks.EventBus.Implementation
 {
@@ -30,12 +29,12 @@ namespace DocWorks.BuildingBlocks.EventBus.Implementation
                 To = sedaEvent.To.ToString()
             };
 
-            message.UserProperties.Add(UserPropertyFrom, sedaEvent.From.ToString());
-            message.UserProperties.Add(UserPropertyCmsOperation, sedaEvent.CmsOperation.ToString());
-            message.UserProperties.Add(UserPropertyEventType, sedaEvent.EventType.ToString());
-            message.UserProperties.Add(UserPropertyPriority, sedaEvent.Priority.ToString());
-            message.UserProperties.Add(UserPropertyEventIndexInFlowMap, sedaEvent.EventIndexInFlowMap);
-            message.UserProperties.Add(UserPropertyEventName, sedaEvent.EventName.ToString());
+            message.UserProperties.Add(ServiceBusConstants.UserPropertyFrom, sedaEvent.From.ToString());
+            message.UserProperties.Add(ServiceBusConstants.UserPropertyCmsOperation, sedaEvent.CmsOperation.ToString());
+            message.UserProperties.Add(ServiceBusConstants.UserPropertyEventType, sedaEvent.EventType.ToString());
+            message.UserProperties.Add(ServiceBusConstants.UserPropertyPriority, sedaEvent.Priority.ToString());
+            message.UserProperties.Add(ServiceBusConstants.UserPropertyEventIndexInFlowMap, sedaEvent.EventIndexInFlowMap);
+            message.UserProperties.Add(ServiceBusConstants.UserPropertyEventName, sedaEvent.EventName.ToString());
 
             var jsonString = JsonConvert.SerializeObject(sedaEvent.PayLoad);
             message.Body = Encoding.UTF8.GetBytes(jsonString);

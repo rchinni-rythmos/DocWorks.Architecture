@@ -1,6 +1,8 @@
 ﻿using DocWorks.BuildingBlocks.DataAccess.Attributes;
+using DocWorks.BuildingBlocks.DataAccess.Entity;
+using DocWorks.BuildingBlocks.Global.Enumerations;
 
-namespace DocWorks.BuildingBlocks.DataAccess.Entity
+namespace DocWorks.DataAccess.Common.Entity
 {
     [CollectionName("Project")]
     public class Project : BaseEntity

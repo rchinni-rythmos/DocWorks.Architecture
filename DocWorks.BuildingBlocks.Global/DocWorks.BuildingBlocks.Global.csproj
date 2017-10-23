@@ -5,7 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entity\**" />
+    <EmbeddedResource Remove="Entity\**" />
+    <None Remove="Entity\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Model\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
 </Project>

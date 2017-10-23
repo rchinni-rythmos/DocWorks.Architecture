@@ -1,7 +1,9 @@
 ﻿using DocWorks.BuildingBlocks.DataAccess.Abstractions;
-using DocWorks.BuildingBlocks.DataAccess.Abstractions.Repository;
+using DocWorks.BuildingBlocks.DataAccess.Implementation.Repository;
+using DocWorks.DataAccess.Common.Abstractions.Repository;
+using DocWorks.DataAccess.Common.Entity;
 
-namespace DocWorks.BuildingBlocks.DataAccess.Implementation.Repository
+namespace DocWorks.DataAccess.Common.Implementation.Repository
 {
     public class FlowMapRepository : BaseRepository<FlowMap>, IFlowMapRepository
     {

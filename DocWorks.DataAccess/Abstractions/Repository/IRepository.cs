@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using DocWorks.BuildingBlocks.DataAccess.Indexes;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -22,6 +23,6 @@ namespace DocWorks.BuildingBlocks.DataAccess.Abstractions.Repository
         Task<UpdateResult> UpdateElementAsync<Property>(Property objProperty, string propertyName, string _id);
         Task<ExpandoObject> UpdateSpecificElementByFilterAsync<TField>(Expression<Func<T, bool>> filter, Expression<Func<T, TField>> updateDefination, TField value);
         List<T> FindAllDocument(Func<T, bool> predicate);
-        void CreateCollectionAndIndexesIfNotExists(List<CMSIndexCreationOption> indexCreationList);
+        void CreateCollectionAndIndexesIfNotExists(List<DbCollectionIndexCreationOperation> indexCreationList);
     }
 }

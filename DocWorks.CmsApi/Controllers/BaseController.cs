@@ -2,6 +2,8 @@
 using DocWorks.BuildingBlocks.DataAccess.Entity;
 using DocWorks.BuildingBlocks.DataAccess.Enumerations;
 using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.DataAccess.Common.Abstractions.Repository;
+using DocWorks.DataAccess.Common.Entity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace DocWorks.CMS.Api.Controllers
 {
-    [Route("api/[controller]")]
     public class BaseController : Controller
     {
         private readonly IResponseRepository _responseRepository = null;

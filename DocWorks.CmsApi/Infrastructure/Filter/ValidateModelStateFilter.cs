@@ -16,7 +16,7 @@ namespace DocWorks.CMS.Api.Infrastructure.Filter
             }
             var response = new ErrorResponse();
             response.Message = "Model validation error occured";
-            response.ModelValidationErrors = context.ModelState.Select(m => new ModelErrorDetail { Field = m.Key, Message = context.ModelState[m.Key].Errors.Select(y => y.ErrorMessage).ToList<String>() }).ToList();
+            response.ModelValidationErrors = context.ModelState.Select(m => new ModelValidationErrorDetail { Field = m.Key, Message = context.ModelState[m.Key].Errors.Select(y => y.ErrorMessage).ToList<String>() }).ToList();
             context.Result = new BadRequestObjectResult(response);
         }
     }

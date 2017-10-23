@@ -1,8 +1,8 @@
-﻿using DocWorks.BuildingBlocks.Global.Abstractions;
+﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
+using DocWorks.BuildingBlocks.EventBus.Enumerations;
+using DocWorks.BuildingBlocks.Global.Enumerations;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using DocWorks.BuildingBlocks.Global.Enumerations;
 
 namespace DocWorks.BuildingBlocks.Global.Implementation
 {
