@@ -1,6 +1,8 @@
 ﻿using DocWorks.BuildingBlocks.DataAccess.Abstractions.Repository;
 using DocWorks.BuildingBlocks.DataAccess.Configuration;
 using DocWorks.BuildingBlocks.DataAccess.Implementation.Repository;
+using DocWorks.BuildingBlocks.EventBus.Abstractions;
+using DocWorks.BuildingBlocks.EventBus.Implementation;
 using DocWorks.BuildingBlocks.Global.Abstractions;
 using DocWorks.BuildingBlocks.Global.Configuration;
 using DocWorks.BuildingBlocks.Global.Enumerations;
@@ -8,6 +10,8 @@ using DocWorks.BuildingBlocks.Global.Implementation;
 using DocWorks.BuildingBlocks.Notification.Abstractions;
 using DocWorks.BuildingBlocks.Notification.Configuration;
 using DocWorks.BuildingBlocks.Notification.Implementation;
+using DocWorks.DataAccess.Common.Abstractions.Repository;
+using DocWorks.DataAccess.Common.Implementation.Repository;
 using DocWorks.Notification.EventBus;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Configuration;

@@ -8,4 +8,14 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstractions\Repository\" />
+    <Folder Include="Implementation\Repository\" />
+    <Folder Include="Entity\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocWorks.DataAccess\DocWorks.BuildingBlocks.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

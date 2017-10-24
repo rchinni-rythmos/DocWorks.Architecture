@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DocWorks.BuildingBlocks.Global.Enumerations
+namespace DocWorks.BuildingBlocks.Global.Enumerations.Notification
 {
     [JsonConverter(typeof(StringEnumConverter))]
     public enum NotificationTopic

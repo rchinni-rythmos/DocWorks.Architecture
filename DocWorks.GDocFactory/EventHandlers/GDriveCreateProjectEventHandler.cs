@@ -1,21 +1,15 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Model;
-using DocWorks.BuildingBlocks.Global.Abstractions;
-using DocWorks.BuildingBlocks.Global.Events;
+﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
 using DocWorks.BuildingBlocks.Global.Model;
 using DocWorks.GDocFactory.Entity;
-using DocWorks.GDocFactory.Model;
 using DocWorks.GDocFactory.Repository;
 using DocWorks.GDocFactory.Services;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DocWorks.GDocFactory.EventHandlers
 {
-    class GDriveCreateProjectEventHandler : IEventHandler<EventHandlerInput>
+    class GDriveCreateProjectEventHandler : IEventHandler<SedaEvent>
     {
         private readonly IGDriveClient _gdriveClient;
         private readonly ILogger _logger;
@@ -26,7 +20,7 @@ namespace DocWorks.GDocFactory.EventHandlers
             this._logger = logger;
             this._gDriveProjectRepository = gDriveProjectRepository;
         }
-        public async Task<dynamic> Handle(EventHandlerInput eventHandlerInput)
+        public async Task<dynamic> Handle(SedaEvent eventHandlerInput)
         {
             // TODO - review Entity and Model design for EventHandlerInputs
             dynamic requestObj = eventHandlerInput.PayLoad.Request;

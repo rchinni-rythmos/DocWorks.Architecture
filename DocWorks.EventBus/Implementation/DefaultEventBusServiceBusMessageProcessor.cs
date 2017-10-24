@@ -1,9 +1,10 @@
-﻿using DocWorks.BuildingBlocks.ErrorHandling.Model;
-using DocWorks.BuildingBlocks.EventBus.Abstractions;
+﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
 using DocWorks.BuildingBlocks.EventBus.Configuration;
-using DocWorks.BuildingBlocks.EventBus.Enumerations;
-using DocWorks.BuildingBlocks.EventBus.Model;
 using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.BuildingBlocks.Global.Enumerations.Events;
+using DocWorks.BuildingBlocks.Global.Model;
+using DocWorks.BuildingBlocks.Global.Model.ErrorHandling;
+using DocWorks.BuildingBlocks.Global.Model.Events;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -30,20 +31,8 @@ namespace DocWorks.BuildingBlocks.Global.Implementation
             this._messagePublisher = messagePublisher;
         }
 
-        public async Task ProcessMessageAsync(Message message)
+        public async Task ProcessMessageAsync(SedaEvent sedaEvent)
         {
-            SedaEvent sedaEvent = new SedaEvent();
-            sedaEvent.ResponseId = message.CorrelationId;
-            sedaEvent.To = (SedaService)Enum.Parse(typeof(SedaService), message.To);
-            sedaEvent.From = (SedaService)Enum.Parse(typeof(SedaService), message.UserProperties[ServiceBusConstants.UserPropertyFrom] as string);
-            sedaEvent.CmsOperation = (CmsOperation)Enum.Parse(typeof(CmsOperation), message.UserProperties[ServiceBusConstants.UserPropertyCmsOperation] as string);
-            sedaEvent.EventType = (EventType)Enum.Parse(typeof(EventType), message.UserProperties[ServiceBusConstants.UserPropertyEventType] as string);
-            sedaEvent.Priority = (Priority)Enum.Parse(typeof(Priority), message.UserProperties[ServiceBusConstants.UserPropertyPriority] as string);
-            sedaEvent.EventName = (EventName)Enum.Parse(typeof(EventName), message.UserProperties[ServiceBusConstants.UserPropertyEventName] as string);
-            sedaEvent.EventIndexInFlowMap = Int32.Parse(message.UserProperties[ServiceBusConstants.UserPropertyEventIndexInFlowMap].ToString());
-            var messageData = Encoding.UTF8.GetString(message.Body);
-            sedaEvent.PayLoad = JsonConvert.DeserializeObject<BasePayLoad>(messageData);
-
             Type eventHandlerType = null;
             var responseSedaEvent = sedaEvent;
 
@@ -51,17 +40,10 @@ namespace DocWorks.BuildingBlocks.Global.Implementation
             {
                 try
                 {
-                    var eventHandlerInput = new EventHandlerInput()
-                    {
-                        ResponseId = sedaEvent.ResponseId,
-                        EventIndexInFlowMap = sedaEvent.EventIndexInFlowMap,
-                        PayLoad = (EventTypeRequestPayLoad)sedaEvent.PayLoad
-                    };
-
                     eventHandlerType = _eventHandlerRegistry.GetHandlerForEvent(sedaEvent.EventName);
                     var eventHandlerInstance = this._serviceProvider.GetService(eventHandlerType);
                     var concreteType = typeof(IEventHandler<>).MakeGenericType(eventHandlerType);
-                    dynamic eventHandlerResult = await (Task<ExpandoObject>)concreteType.GetMethod("Handle").Invoke(eventHandlerInstance, new object[] { eventHandlerInput });
+                    dynamic eventHandlerResult = await (Task<ExpandoObject>)concreteType.GetMethod("Handle").Invoke(eventHandlerInstance, new object[] { sedaEvent });
 
                     EventTypeResponseSuccessPayLoad responsePayLoad = new EventTypeResponseSuccessPayLoad();
                     responsePayLoad.Request = sedaEvent.PayLoad.Request;

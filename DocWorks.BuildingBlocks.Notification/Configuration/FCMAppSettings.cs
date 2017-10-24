@@ -7,16 +7,16 @@ namespace DocWorks.BuildingBlocks.Notification.Configuration
 {
     public class FcmAppSettings
     {
-        public static string GoogleServerKey { get; set; }
+        public string GoogleServerKey { get; set; }
 
-        public static string SenderId { get; set; }
+        public string SenderId { get; set; }
 
-        public static string TopicRegisterUrl { get; set; }
+        public string TopicRegisterUrl { get; set; }
 
-        public static string TopicUnRegisterUrl { get; set; }
+        public string TopicUnRegisterUrl { get; set; }
 
-        public static string DeviceRegisterUrl { get; set; }
+        public string DeviceRegisterUrl { get; set; }
 
-        public static string FCMMessageSendingUrl { get; set; }
+        public string FCMMessageSendingUrl { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using DocWorks.BuildingBlocks.Global.Enumerations;
-using System.Dynamic;
+using DocWorks.BuildingBlocks.Global.Enumerations.Events;
 
 namespace DocWorks.BuildingBlocks.Global.Model
 {

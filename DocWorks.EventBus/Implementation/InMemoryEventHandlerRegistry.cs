@@ -1,6 +1,5 @@
 ﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
-using DocWorks.BuildingBlocks.EventBus.Enumerations;
-using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.BuildingBlocks.Global.Enumerations.Events;
 using System;
 using System.Collections.Generic;
 

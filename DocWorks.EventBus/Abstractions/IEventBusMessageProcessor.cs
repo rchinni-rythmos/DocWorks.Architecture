@@ -1,10 +1,11 @@
-﻿using Microsoft.Azure.ServiceBus;
+﻿using DocWorks.BuildingBlocks.Global.Model;
+using Microsoft.Azure.ServiceBus;
 using System.Threading.Tasks;
 
 namespace DocWorks.BuildingBlocks.EventBus.Abstractions
 {
     public interface IEventBusMessageProcessor
     {
-        Task ProcessMessageAsync(Message message);
+        Task ProcessMessageAsync(SedaEvent message);
     }
 }

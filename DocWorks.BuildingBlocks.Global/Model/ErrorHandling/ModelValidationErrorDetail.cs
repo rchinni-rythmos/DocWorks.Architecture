@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DocWorks.BuildingBlocks.ErrorHandling.Model
+namespace DocWorks.BuildingBlocks.Global.Model.ErrorHandling
 {
     public class ModelValidationErrorDetail
     {

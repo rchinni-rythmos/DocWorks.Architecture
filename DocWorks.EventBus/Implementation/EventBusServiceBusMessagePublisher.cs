@@ -1,6 +1,6 @@
 ﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
 using DocWorks.BuildingBlocks.EventBus.Configuration;
-using DocWorks.BuildingBlocks.EventBus.Model;
+using DocWorks.BuildingBlocks.Global.Model;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

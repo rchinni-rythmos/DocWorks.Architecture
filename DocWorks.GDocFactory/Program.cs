@@ -1,6 +1,7 @@
-﻿using DocWorks.BuildingBlocks.Global.Abstractions;
-using DocWorks.BuildingBlocks.Global.Configuration;
-using DocWorks.BuildingBlocks.Global.Enumerations;
+﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
+using DocWorks.BuildingBlocks.EventBus.Configuration;
+using DocWorks.BuildingBlocks.EventBus.Implementation;
+using DocWorks.BuildingBlocks.Global.Enumerations.Events;
 using DocWorks.BuildingBlocks.Global.Implementation;
 using DocWorks.GDocFactory.Configuration;
 using DocWorks.GDocFactory.EventHandlers;

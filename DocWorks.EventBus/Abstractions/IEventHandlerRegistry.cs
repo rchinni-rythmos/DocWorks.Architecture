@@ -1,5 +1,4 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Enumerations;
-using DocWorks.BuildingBlocks.Global.Enumerations;
+﻿using DocWorks.BuildingBlocks.Global.Enumerations.Events;
 using System;
 
 namespace DocWorks.BuildingBlocks.EventBus.Abstractions

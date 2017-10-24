@@ -1,7 +1,8 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Enumerations;
-using DocWorks.BuildingBlocks.Global.Enumerations;
+﻿using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.BuildingBlocks.Global.Enumerations.Events;
+using DocWorks.BuildingBlocks.Global.Model.Events;
 
-namespace DocWorks.BuildingBlocks.EventBus.Model
+namespace DocWorks.BuildingBlocks.Global.Model
 {
     public class SedaEvent
     {

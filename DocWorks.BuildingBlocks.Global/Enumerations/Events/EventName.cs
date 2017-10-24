@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DocWorks.BuildingBlocks.Global.Enumerations
+namespace DocWorks.BuildingBlocks.Global.Enumerations.Events
 {
     public enum EventName
     {
