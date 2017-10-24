@@ -1,12 +1,7 @@
-﻿using DocWorks.BuildingBlocks.DataAccess.Abstractions.Repository;
-using DocWorks.BuildingBlocks.DataAccess.Configuration;
-using DocWorks.BuildingBlocks.DataAccess.Implementation.Repository;
+﻿using DocWorks.BuildingBlocks.DataAccess.Configuration;
 using DocWorks.BuildingBlocks.EventBus.Abstractions;
+using DocWorks.BuildingBlocks.EventBus.Configuration;
 using DocWorks.BuildingBlocks.EventBus.Implementation;
-using DocWorks.BuildingBlocks.Global.Abstractions;
-using DocWorks.BuildingBlocks.Global.Configuration;
-using DocWorks.BuildingBlocks.Global.Enumerations;
-using DocWorks.BuildingBlocks.Global.Implementation;
 using DocWorks.BuildingBlocks.Notification.Abstractions;
 using DocWorks.BuildingBlocks.Notification.Configuration;
 using DocWorks.BuildingBlocks.Notification.Implementation;

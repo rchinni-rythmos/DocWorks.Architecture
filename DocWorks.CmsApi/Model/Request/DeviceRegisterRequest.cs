@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DocWorks.CMS.Api.Model.Request
 {
     public class DeviceRegisterRequest 
     {
+        [Required]
         public string FcmId { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DocWorks.BuildingBlocks.Notification.Model.Request;
 using System.Threading.Tasks;
 
 namespace DocWorks.BuildingBlocks.Notification.Abstractions

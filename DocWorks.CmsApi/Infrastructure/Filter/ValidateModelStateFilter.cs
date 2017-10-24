@@ -1,4 +1,4 @@
-﻿using DocWorks.BuildingBlocks.ErrorHandling.Model;
+﻿using DocWorks.BuildingBlocks.Global.Model.ErrorHandling;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DocWorks.BuildingBlocks.Global.Enumerations.Notification;
+using System.ComponentModel.DataAnnotations;
 
 namespace DocWorks.CMS.Api.Model.Request
 {
     public class TopicRegisterRequest 
     {
-        public string TopicName { get; set; }
+        [Required]
+        public NotificationTopic TopicName { get; set; }
     }
 }
