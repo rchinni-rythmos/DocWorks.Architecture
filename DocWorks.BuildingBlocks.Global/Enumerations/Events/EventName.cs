@@ -6,6 +6,11 @@ namespace DocWorks.BuildingBlocks.Global.Enumerations.Events
 {
     public enum EventName
     {
+        /// <summary>
+        /// This is a special event, used as START event to Orchestrator, to start execution in a flowmap.
+        /// </summary>
+        Init =1,
+
         #region Core Events [101 to 200]
         CoreCreateProject =101,
         CoreGetProjects=102,

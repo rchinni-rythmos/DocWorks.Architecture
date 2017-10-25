@@ -7,6 +7,6 @@ namespace DocWorks.BuildingBlocks.Global.Model.Events
 {
     public class EventTypeResponseSuccessPayLoad : BasePayLoad
     {
-        public ExpandoObject Response { get; set; }
+        public dynamic Response { get; set; }
     }
 }

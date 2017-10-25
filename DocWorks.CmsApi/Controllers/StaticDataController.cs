@@ -11,7 +11,6 @@ namespace DocWorks.CMS.Api.Controllers
     [Route("api/[controller]")]
     public class StaticDataController : Controller
     {
-
         IStaticDataOperations StaticDataOperations { get; set; }
         public StaticDataController(IStaticDataOperations staticDataOperations)
         {

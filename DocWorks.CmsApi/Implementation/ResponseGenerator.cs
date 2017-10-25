@@ -1,29 +1,28 @@
-﻿using DocWorks.BuildingBlocks.DataAccess.Abstractions.Repository;
-using DocWorks.BuildingBlocks.DataAccess.Entity;
-using DocWorks.BuildingBlocks.DataAccess.Enumerations;
+﻿using DocWorks.BuildingBlocks.DataAccess.Enumerations;
 using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.CMS.Api.Abstractions;
 using DocWorks.DataAccess.Common.Abstractions.Repository;
 using DocWorks.DataAccess.Common.Entity;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DocWorks.CMS.Api.Controllers
+namespace DocWorks.CMS.Api.Implementation
 {
-    public class BaseController : Controller
+    
+    public class ResponseGenerator : IResponseGenerator
     {
         private readonly IResponseRepository _responseRepository = null;
         private readonly IFlowMapRepository _flowMapRepository = null;
+        private IResponseRepository responseRepository;
 
-        public BaseController(IResponseRepository responseRepository, IFlowMapRepository flowMapRepository)
+        public ResponseGenerator(IResponseRepository responseRepository, IFlowMapRepository flowMapRepository)
         {
             this._responseRepository = responseRepository;
             this._flowMapRepository = flowMapRepository;
         }
-
-        protected async Task<Response> CreateResponseAsync(CmsOperation operation)
+        public async Task<Response> CreateResponseAsync(CmsOperation operation)
         {
             Response responseObj = new Response();
             responseObj._id = Guid.NewGuid().ToString();

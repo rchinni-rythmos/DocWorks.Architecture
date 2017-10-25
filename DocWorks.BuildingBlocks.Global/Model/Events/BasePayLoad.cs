@@ -4,7 +4,6 @@ namespace DocWorks.BuildingBlocks.Global.Model.Events
 {
     public class BasePayLoad
     {
-        public ExpandoObject Request { get; set; }
-        
+        public dynamic Request { get; set; }
     }
 }

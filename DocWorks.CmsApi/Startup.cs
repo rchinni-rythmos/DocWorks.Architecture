@@ -13,8 +13,10 @@ using DocWorks.BuildingBlocks.Notification.Configuration;
 using DocWorks.BuildingBlocks.Notification.Implementation;
 using DocWorks.BuildingBlocks.Notification.Implementation.Repository;
 using DocWorks.BuildingBlocks.Notification.Model.Request;
+using DocWorks.CMS.Api.Abstractions;
 using DocWorks.CMS.Api.Authentication;
 using DocWorks.CMS.Api.Configuration;
+using DocWorks.CMS.Api.Implementation;
 using DocWorks.CMS.Api.Infrastructure.Filter;
 using DocWorks.CMS.Api.Model.Request;
 using DocWorks.DataAccess.Common.Abstractions.Repository;
@@ -111,6 +113,7 @@ namespace DocWorks.CmsApi
             // TODO - Not sure authenticationSettings can be injected everywhere
             //services.AddSingleton(this.authenticationSettings);
             services.AddSingleton<IRegistrationService, FcmRegistrationService>();
+            services.AddSingleton<IResponseGenerator, ResponseGenerator>();
 
             // Repository
             services.AddSingleton<IResponseRepository, ResponseRepository>();

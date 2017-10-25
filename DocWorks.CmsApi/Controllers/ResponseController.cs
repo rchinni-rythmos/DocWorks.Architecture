@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DocWorks.BuildingBlocks.DataAccess.Entity;
+using DocWorks.DataAccess.Common.Abstractions.Repository;
 
 namespace DocWorks.CMS.Api.Controllers
 {
