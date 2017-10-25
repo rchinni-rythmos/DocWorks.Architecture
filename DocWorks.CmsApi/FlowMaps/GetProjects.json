@@ -7,8 +7,7 @@
   ],
   "Events": [
     {
-      "To": "Core",
-      "ApiOperation": "GetProjects",
+      "EventName": "GetProjects",
       "Index": 1,
       "Status": "None"
     }

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DocWorks.BuildingBlocks.ErrorHandling\DocWorks.BuildingBlocks.ErrorHandling.csproj" />
     <ProjectReference Include="..\DocWorks.BuildingBlocks.Global\DocWorks.BuildingBlocks.Global.csproj" />
     <ProjectReference Include="..\DocWorks.DataAccess\DocWorks.BuildingBlocks.DataAccess.csproj" />
   </ItemGroup>

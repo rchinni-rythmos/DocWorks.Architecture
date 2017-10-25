@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DocWorks.BuildingBlocks.ErrorHandling\DocWorks.BuildingBlocks.ErrorHandling.csproj" />
     <ProjectReference Include="..\DocWorks.BuildingBlocks.Notification\DocWorks.BuildingBlocks.Notification.csproj" />
     <ProjectReference Include="..\DocWorks.DataAccess.Common\DocWorks.DataAccess.Common.csproj" />
     <ProjectReference Include="..\DocWorks.DataAccess\DocWorks.BuildingBlocks.DataAccess.csproj" />

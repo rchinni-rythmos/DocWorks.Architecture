@@ -9,20 +9,17 @@
   ],
   "Events": [
     {
-      "To": "Core",
-      "ApiOperation": "CreateProject",
+      "EventName": "CoreCreateProject",
       "Index": 1,
       "Status": "None"
     },
     {
-      "To": "GDrive",
-      "ApiOperation": "CreateProject",
+      "EventName": "GDriveCreateProject",
       "Index": 2,
       "Status": "None"
     },
     {
-      "To": "Core",
-      "ApiOperation": "SetProjectComplete",
+      "EventName": "CoreSetProjectComplete",
       "Index": 3,
       "Status": "None"
     }

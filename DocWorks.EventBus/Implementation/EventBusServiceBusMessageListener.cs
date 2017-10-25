@@ -39,20 +39,25 @@ namespace DocWorks.BuildingBlocks.EventBus.Implementation
 
         private void RegisterSubscriptionClientMessageHandler()
         {
+
             _subscriptionClient.RegisterMessageHandler(
                 async (message, token) =>
                 {
-                    SedaEvent sedaEvent = new SedaEvent();
-                    sedaEvent.ResponseId = message.CorrelationId;
-                    sedaEvent.To = (SedaService)Enum.Parse(typeof(SedaService), message.To);
-                    sedaEvent.From = (SedaService)Enum.Parse(typeof(SedaService), message.UserProperties[ServiceBusConstants.UserPropertyFrom] as string);
-                    sedaEvent.CmsOperation = (CmsOperation)Enum.Parse(typeof(CmsOperation), message.UserProperties[ServiceBusConstants.UserPropertyCmsOperation] as string);
-                    sedaEvent.EventType = (EventType)Enum.Parse(typeof(EventType), message.UserProperties[ServiceBusConstants.UserPropertyEventType] as string);
-                    sedaEvent.Priority = (Priority)Enum.Parse(typeof(Priority), message.UserProperties[ServiceBusConstants.UserPropertyPriority] as string);
-                    sedaEvent.EventName = (EventName)Enum.Parse(typeof(EventName), message.UserProperties[ServiceBusConstants.UserPropertyEventName] as string);
-                    sedaEvent.EventIndexInFlowMap = Int32.Parse(message.UserProperties[ServiceBusConstants.UserPropertyEventIndexInFlowMap].ToString());
+                    var responseId = message.CorrelationId;
+                    var eventType = (EventType)Enum.Parse(typeof(EventType), message.UserProperties[ServiceBusConstants.UserPropertyEventType] as string);
+                    //var eventName = (EventName)Enum.Parse(typeof(EventName), message.UserProperties[ServiceBusConstants.UserPropertyEventName] as string);
+                    var eventName = (EventName)Enum.Parse(typeof(EventName), message.Label as string);
+                    var eventIndexInFlowMap = Int32.Parse(message.UserProperties[ServiceBusConstants.UserPropertyEventIndexInFlowMap].ToString());
                     var messageData = Encoding.UTF8.GetString(message.Body);
-                    sedaEvent.PayLoad = JsonConvert.DeserializeObject<BasePayLoad>(messageData);
+                    var payLoad = JsonConvert.DeserializeObject<BasePayLoad>(messageData);
+
+                    SedaEvent sedaEvent = new SedaEvent(
+                        responseId,
+                        eventType,
+                        payLoad,
+                        eventName,
+                        eventIndexInFlowMap
+                        );
 
                     await this._messageProcessor.ProcessMessageAsync(sedaEvent);
                     // Complete the message so that it is not received again.

@@ -51,8 +51,6 @@ namespace DocWorks.BuildingBlocks.Global.Implementation
 
                     responseSedaEvent.PayLoad = responsePayLoad;
                     responseSedaEvent.EventType = EventType.ResponseSuccess;
-                    responseSedaEvent.Priority = Priority.One;
-                    responseSedaEvent.To = SedaService.Notification;
                     await this._messagePublisher.PublishAsync(responseSedaEvent);
                 }
                 catch (Exception ex)
@@ -82,8 +80,6 @@ namespace DocWorks.BuildingBlocks.Global.Implementation
 
                     responseSedaEvent.PayLoad = errorResponsePayLoad;
                     responseSedaEvent.EventType = EventType.ResponseFailure;
-                    responseSedaEvent.Priority = Priority.One;
-                    responseSedaEvent.To = SedaService.Notification;
                     await this._messagePublisher.PublishAsync(responseSedaEvent);
                 }
             }

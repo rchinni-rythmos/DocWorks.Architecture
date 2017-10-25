@@ -26,15 +26,11 @@ namespace DocWorks.BuildingBlocks.EventBus.Implementation
             var message = new Message()
             {
                 CorrelationId = sedaEvent.ResponseId,
-                To = sedaEvent.To.ToString()
+                Label = sedaEvent.EventName.ToString()
             };
 
-            message.UserProperties.Add(ServiceBusConstants.UserPropertyFrom, sedaEvent.From.ToString());
-            message.UserProperties.Add(ServiceBusConstants.UserPropertyCmsOperation, sedaEvent.CmsOperation.ToString());
             message.UserProperties.Add(ServiceBusConstants.UserPropertyEventType, sedaEvent.EventType.ToString());
-            message.UserProperties.Add(ServiceBusConstants.UserPropertyPriority, sedaEvent.Priority.ToString());
             message.UserProperties.Add(ServiceBusConstants.UserPropertyEventIndexInFlowMap, sedaEvent.EventIndexInFlowMap);
-            message.UserProperties.Add(ServiceBusConstants.UserPropertyEventName, sedaEvent.EventName.ToString());
 
             var jsonString = JsonConvert.SerializeObject(sedaEvent.PayLoad);
             message.Body = Encoding.UTF8.GetBytes(jsonString);

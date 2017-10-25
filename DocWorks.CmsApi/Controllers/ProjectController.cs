@@ -32,7 +32,7 @@ namespace DocWorks.CMS.Api.Controllers
             var responseObject = await this._responseGenerator.CreateResponseAsync(CmsOperation.GetProjects);
             BasePayLoad payLoad = new BasePayLoad();
             payLoad.Request = new ExpandoObject();
-            SedaEvent sedaEvent = new SedaEvent(responseObject._id, SedaService.Notification, SedaService.CMS, EventType.Request, CmsOperation.GetProjects, Priority.One, payLoad);
+            SedaEvent sedaEvent = new SedaEvent(responseObject._id, SedaService.Orchestrator, SedaService.CMS, EventType.Request, CmsOperation.GetProjects, Priority.One, payLoad);
             await this._eventBusMessagePublisher.PublishAsync(sedaEvent);
             BaseApiResponse apiResponse = new BaseApiResponse();
             apiResponse.ResponseId = responseObject._id;
@@ -50,10 +50,10 @@ namespace DocWorks.CMS.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateProjectRequest createProject)
         {
-            var result = await this._responseGenerator.CreateResponseAsync(CmsOperation.GetProjects);
+            var result = await this._responseGenerator.CreateResponseAsync(CmsOperation.CreateProject);
             BasePayLoad payLoad = new BasePayLoad();
             payLoad.Request = createProject;
-            SedaEvent sedaEvent = new SedaEvent(result._id, SedaService.Notification, SedaService.CMS, EventType.Request, CmsOperation.CreateProject, Priority.One, payLoad);
+            SedaEvent sedaEvent = new SedaEvent(result._id, SedaService.Orchestrator, SedaService.CMS, EventType.Request, CmsOperation.CreateProject, Priority.One, payLoad);
             await this._eventBusMessagePublisher.PublishAsync(sedaEvent);
             BaseApiResponse apiResponse = new BaseApiResponse();
             apiResponse.ResponseId = result._id;
@@ -80,7 +80,7 @@ namespace DocWorks.CMS.Api.Controllers
             var result = await this._responseGenerator.CreateResponseAsync(CmsOperation.GetProjects);
             BasePayLoad payLoad = new BasePayLoad();
             payLoad.Request = request;
-            SedaEvent sedaEvent = new SedaEvent(result._id, SedaService.Notification, SedaService.CMS, EventType.Request, CmsOperation.ValidateRepository, Priority.One, payLoad);
+            SedaEvent sedaEvent = new SedaEvent(result._id, SedaService.Orchestrator, SedaService.CMS, EventType.Request, CmsOperation.ValidateRepository, Priority.One, payLoad);
             await this._eventBusMessagePublisher.PublishAsync(sedaEvent);
             BaseApiResponse apiResponse = new BaseApiResponse();
             apiResponse.ResponseId = result._id;

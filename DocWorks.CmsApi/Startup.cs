@@ -114,12 +114,13 @@ namespace DocWorks.CmsApi
             //services.AddSingleton(this.authenticationSettings);
             services.AddSingleton<IRegistrationService, FcmRegistrationService>();
             services.AddSingleton<IResponseGenerator, ResponseGenerator>();
+            services.AddSingleton<IStaticDataService, StaticDataService>();
 
             // Repository
             services.AddSingleton<IResponseRepository, ResponseRepository>();
             services.AddSingleton<IFlowMapRepository, FlowMapRepository>();
             services.AddSingleton<IUserDeviceRepository, UserDeviceRepository>();
-
+            services.AddSingleton<IUserDeviceRepository, UserDeviceRepository>();
             // Automap
             services.AddSingleton(iMapper);
 

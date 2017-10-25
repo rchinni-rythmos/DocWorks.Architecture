@@ -1,9 +1,16 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
+﻿using DocWorks.BuildingBlocks.DataAccess.Enumerations;
+using DocWorks.BuildingBlocks.EventBus.Abstractions;
 using DocWorks.BuildingBlocks.Global.Enumerations.Events;
+using DocWorks.BuildingBlocks.Global.Enumerations.Notification;
 using DocWorks.BuildingBlocks.Global.Model;
 using DocWorks.BuildingBlocks.Notification.Abstractions;
+using DocWorks.BuildingBlocks.Notification.Model.Request;
 using DocWorks.DataAccess.Common.Abstractions.Repository;
+using DocWorks.DataAccess.Common.Entity;
 using Microsoft.Extensions.Logging;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace DocWorks.Notification.EventBus
@@ -36,35 +43,31 @@ namespace DocWorks.Notification.EventBus
                     var nextEventSet = flowMap.GetNextSetofEvents(-1);
                     foreach (var eventToRaise in nextEventSet)
                     {
-                        var eventMessage = new CMSMessage(
-                            currentCmsMessage.CMSResponseId,
-                            eventToRaise.To,
-                            SEDAService.Notification,
-                            MessageType.Request,
-                            currentCmsMessage.CMSOperation,
-                            currentCmsMessage.CMSPriority,
-                            currentCmsMessage.CMSMessageBody,
-                            eventToRaise.ApiOperation,
+                        var eventMessage = new SedaEvent(
+                            sedaEvent.ResponseId,
+                            EventType.Request,
+                            sedaEvent.PayLoad,
+                            eventToRaise.EventName,
                             eventToRaise.Index
                             );
                         // Set the Event Status to Wait
                         await this._responseRepository.UpdateSpecificElementByFilterAsync(
-                            x => x._id == currentCmsMessage.CMSResponseId && x.FlowMap.Events.Any(y => y.Index == eventToRaise.Index),
+                            x => x._id == sedaEvent.ResponseId && x.FlowMap.Events.Any(y => y.Index == eventToRaise.Index),
                             x => x.FlowMap.Events[-1].Status,
-                            CMSEventStatus.Wait);
+                            EventStatus.Wait);
                         await this._messagePublisher.PublishAsync(eventMessage);
                     }
                     break;
                 case EventType.ResponseSuccess:
                     // Update the current event status in DB
                     await this._responseRepository.UpdateSpecificElementByFilterAsync(
-                            x => x._id == currentCmsMessage.CMSResponseId && x.FlowMap.Events.Any(y => y.Index == currentCmsMessage.CMSEventIndex),
+                            x => x._id == sedaEvent.ResponseId && x.FlowMap.Events.Any(y => y.Index == sedaEvent.EventIndexInFlowMap),
                             x => x.FlowMap.Events[-1].Status,
-                            CMSEventStatus.Success);
+                            EventStatus.Success);
                     // Get the latest response status - Is the response already marked as complete,
                     // this can happen if a failure occurred with one of the other parallel events within the group.
                     // If so, dont need to do anything, just return
-                    if (responseObject.Status == Core.Common.DataAccess.EntityStatus.Error)
+                    if (responseObject.Status == EntityStatus.Error)
                         break;
                     // Check if the entire operation is complete (current one could be the last pending event)
                     // if so, update the response status to OK and add the response to response content
@@ -72,12 +75,12 @@ namespace DocWorks.Notification.EventBus
                     // return 
                     // ?? ToDo: multiple success events in parallel (See if only one thread can update the response status through MongoDB findAndModify()
                     // and only that thread raises the FCM notification
-                    var latestResponseObj = await this._responseRepository.GetDocumentAsync(currentCmsMessage.CMSResponseId);
+                    var latestResponseObj = await this._responseRepository.GetDocumentAsync(sedaEvent.ResponseId);
                     if (latestResponseObj.FlowMap.IsOperationComplete)
                     {
                         latestResponseObj.Content = currentCmsMessage.CMSMessageBody;
-                        latestResponseObj.Status = Core.Common.DataAccess.EntityStatus.Ok;
-                        await this._responseRepository.ReplaceElementAsync(currentCmsMessage.CMSResponseId, latestResponseObj);
+                        latestResponseObj.Status = EntityStatus.Ok;
+                        await this._responseRepository.ReplaceElementAsync(sedaEvent.ResponseId, latestResponseObj);
                         await SendOperationCompleteNotificationAsync(latestResponseObj);
                         break;
                     }
@@ -85,37 +88,33 @@ namespace DocWorks.Notification.EventBus
                     // if so, raise the next set of events. 
                     // TODO: (?? multiple success events in parallel within the same group. 
                     // Need to have a flag to mark the group as complete, whichever thread gets that update will raise next set of events)
-                    if (latestResponseObj.FlowMap.GetCompleteStatusForEventGroupByEventIndex(currentCmsMessage.CMSEventIndex))
+                    if (latestResponseObj.FlowMap.GetCompleteStatusForEventGroupByEventIndex(sedaEvent.EventIndexInFlowMap))
                     {
-                        nextEventSet = flowMap.GetNextSetofEvents(currentCmsMessage.CMSEventIndex);
+                        nextEventSet = flowMap.GetNextSetofEvents(sedaEvent.EventIndexInFlowMap);
                         foreach (var eventToRaise in nextEventSet)
                         {
-                            var eventMessage = new CMSMessage(
-                                currentCmsMessage.CMSResponseId,
-                                eventToRaise.To,
-                                SEDAService.Notification,
-                                MessageType.Request,
-                                currentCmsMessage.CMSOperation,
-                                currentCmsMessage.CMSPriority,
+                            var eventMessage = new SedaEvent(
+                                sedaEvent.ResponseId,
+                                EventType.Request,
                                 currentCmsMessage.CMSMessageBody,
-                                eventToRaise.ApiOperation,
+                                eventToRaise.EventName,
                                 eventToRaise.Index
                                 );
                             // Set the Event Status to Wait
                             await this._responseRepository.UpdateSpecificElementByFilterAsync(
-                                x => x._id == currentCmsMessage.CMSResponseId && x.FlowMap.Events.Any(y => y.Index == eventToRaise.Index),
+                                x => x._id == sedaEvent.ResponseId && x.FlowMap.Events.Any(y => y.Index == eventToRaise.Index),
                                 x => x.FlowMap.Events[-1].Status,
-                                CMSEventStatus.Wait);
-                            await MessagingHelper.SendMessageAsync(eventMessage);
+                                EventStatus.Wait);
+                            await this._messagePublisher.PublishAsync(eventMessage);
                         }
                     }
                     break;
                 case EventType.ResponseFailure:
                     // update the DB status for the event
                     await this._responseRepository.UpdateSpecificElementByFilterAsync(
-                            x => x._id == currentCmsMessage.CMSResponseId && x.FlowMap.Events.Any(y => y.Index == currentCmsMessage.CMSEventIndex),
+                            x => x._id == sedaEvent.ResponseId && x.FlowMap.Events.Any(y => y.Index == sedaEvent.EventIndexInFlowMap),
                             x => x.FlowMap.Events[-1].Status,
-                            CMSEventStatus.Failure);
+                            EventStatus.Failure);
                     // assumption: Abort the operation on the first failure. That is:
                     // On first failure, update the operation status to Error
                     // and send the FCM notification for complete with failure
@@ -125,11 +124,11 @@ namespace DocWorks.Notification.EventBus
                     // Get the response status, if it is not Error, then this is the first error
                     // Update the response status to Error, if that is successful
                     // raise the FCM notification for complete with failure
-                    var failResponseObj = await this._responseRepository.GetDocumentAsync(currentCmsMessage.CMSResponseId);
-                    if (failResponseObj.Status != Core.Common.DataAccess.EntityStatus.Error)
+                    var failResponseObj = await this._responseRepository.GetDocumentAsync(sedaEvent.ResponseId);
+                    if (failResponseObj.Status != EntityStatus.Error)
                     {
-                        failResponseObj.Status = Core.Common.DataAccess.EntityStatus.Error;
-                        await this._responseRepository.ReplaceElementAsync(currentCmsMessage.CMSResponseId, failResponseObj);
+                        failResponseObj.Status = EntityStatus.Error;
+                        await this._responseRepository.ReplaceElementAsync(sedaEvent.ResponseId, failResponseObj);
                         await SendOperationCompleteNotificationAsync(failResponseObj);
                         break;
                     }

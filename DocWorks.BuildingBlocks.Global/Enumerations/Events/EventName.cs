@@ -9,12 +9,12 @@ namespace DocWorks.BuildingBlocks.Global.Enumerations.Events
         /// <summary>
         /// This is a special event, used as START event to Orchestrator, to start execution in a flowmap.
         /// </summary>
-        Init =1,
+        OrchestratorInit =1,
 
         #region Core Events [101 to 200]
         CoreCreateProject =101,
         CoreGetProjects=102,
-        SetProjectComplete=103,
+        CoreSetProjectComplete=103,
         #endregion
 
         #region GDrive Events [201 to 300]

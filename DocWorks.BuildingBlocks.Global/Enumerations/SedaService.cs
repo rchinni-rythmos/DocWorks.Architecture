@@ -10,6 +10,6 @@ namespace DocWorks.BuildingBlocks.Global.Enumerations
         Core = 2,
         GDrive = 3,
         SourceSync = 4,
-        Notification = 5
+        Orchestrator = 5
     }
 }

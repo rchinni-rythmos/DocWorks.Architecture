@@ -1,6 +1,8 @@
 ﻿using DocWorks.BuildingBlocks.DataAccess.Attributes;
 using DocWorks.BuildingBlocks.DataAccess.Entity;
 using DocWorks.BuildingBlocks.Global.Enumerations;
+using DocWorks.BuildingBlocks.Global.Enumerations.Events;
+using DocWorks.BuildingBlocks.Global.Enumerations.Notification;
 using DocWorks.BuildingBlocks.Global.Model;
 using System.Collections.Generic;
 using System.Linq;
