@@ -1,7 +1,4 @@
-﻿using DocWorks.Core.Common.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DocWorks.BuildingBlocks.DataAccess.Entity;
 
 namespace DocWorks.BuildingBlocks.DataAccess.Abstractions.Repository
 {

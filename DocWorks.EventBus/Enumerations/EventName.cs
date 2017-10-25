@@ -14,6 +14,7 @@ namespace DocWorks.BuildingBlocks.EventBus.Enumerations
 
         #region GDrive Events [201 to 300]
         GDriveCreateProject = 201,
+        GDriveCreateDistribution = 202,
         #endregion
 
         #region SourceSync Events [301 to 400]

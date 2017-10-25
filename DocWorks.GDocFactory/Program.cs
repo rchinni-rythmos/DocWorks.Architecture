@@ -1,4 +1,5 @@
-﻿using DocWorks.BuildingBlocks.Global.Abstractions;
+﻿using DocWorks.BuildingBlocks.EventBus.Enumerations;
+using DocWorks.BuildingBlocks.Global.Abstractions;
 using DocWorks.BuildingBlocks.Global.Configuration;
 using DocWorks.BuildingBlocks.Global.Enumerations;
 using DocWorks.BuildingBlocks.Global.Implementation;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
+using DocWorks.BuildingBlocks.EventBus.Implementation;
 
 namespace DocWorks.GDocFactory
 {
@@ -69,6 +71,7 @@ namespace DocWorks.GDocFactory
         {
             var eventHandlerRegistry = serviceProvider.GetService<IEventHandlerRegistry>();
             eventHandlerRegistry.AddEventHandler(EventName.GDriveCreateProject, typeof(GDriveCreateProjectEventHandler));
+            eventHandlerRegistry.AddEventHandler(EventName.GDriveCreateDistribution, typeof(GDriveCreateDistributionEventHandler));
         }
     }
 }

@@ -13,12 +13,15 @@ namespace DocWorks.GDocFactory.Services
     public class GDriveClient : IGDriveClient
     {
         private const string GDriveFolderMimeType = "application/vnd.google-apps.folder";
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private const string GDriveDocumentMimeType = "application/vnd.google-apps.document";
+        // private readonly IHostingEnvironment _hostingEnvironment;
         private readonly GDriveFactoryAppSettings _gdriveFactorySettings = null;
+
         public GDriveClient(GDriveFactoryAppSettings gdriveFactorySettings)
         {
             this._gdriveFactorySettings = gdriveFactorySettings;
         }
+
         public string CreateChildFolderOfRoot(string directoryTitle)
         {
             // TODO - think if GDriveFile Model is needed.
@@ -36,7 +39,15 @@ namespace DocWorks.GDocFactory.Services
 
         public string CreateChildFolder(string folderName, string parentFolderId)
         {
-            throw new NotImplementedException();
+            var objGDriveFile = new GDriveFile
+            {
+                Parent = parentFolderId,
+                MimeType = GDriveFolderMimeType,
+                Title = folderName,
+                Description = string.Empty,
+            };
+
+            return this.CreateFolder(objGDriveFile);
         }
 
         public string CreateDocumentInFolder(string documentName, string parentFolderId)
@@ -46,13 +57,27 @@ namespace DocWorks.GDocFactory.Services
 
         public string CreateDocumentInFolder(string documentName, string content, string parentFolderId)
         {
-            throw new NotImplementedException();
+            MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(content ?? ""));
+            Google.Apis.Drive.v3.Data.File body = new Google.Apis.Drive.v3.Data.File
+            {
+                Name = documentName,
+                Description = string.Empty,
+                MimeType = GDriveDocumentMimeType,
+                Parents = new List<string>() { parentFolderId }
+            };
+            FilesResource.CreateMediaUpload request = null;
+            using (DriveService driveService = this.AuthenticateServiceAccount())
+            {
+                request = driveService.Files.Create(body, stream, "text/html");
+                request.Fields = "*";
+                request.Upload();
+            }
+            return request.ResponseBody.Id;
         }
 
         private string CreateFolder(GDriveFile objGDriveFile)
         {
             string newFileId = null;
-            Google.Apis.Drive.v3.Data.File newDirectory = null;
 
             // Create metaData for a new Directory
             Google.Apis.Drive.v3.Data.File body = new Google.Apis.Drive.v3.Data.File
@@ -65,6 +90,7 @@ namespace DocWorks.GDocFactory.Services
 
             using (DriveService service = this.AuthenticateServiceAccount())
             {
+                Google.Apis.Drive.v3.Data.File newDirectory = null;
                 FilesResource.CreateRequest request = service.Files.Create(body);
                 request.Fields = "*";
                 newDirectory = request.Execute();
@@ -80,7 +106,8 @@ namespace DocWorks.GDocFactory.Services
             string serviceAccountCredentialFilePath = this._gdriveFactorySettings.ServiceAccountCredentialFilePath; // "\\GoogleDriverServer-ba41e5383e7b.json";
             DriveService ds = null;
             string[] scopes = new string[] { DriveService.Scope.Drive }; // Full access
-            string webPath = _hostingEnvironment.ContentRootPath;
+                                                                         // string webPath = _hostingEnvironment.ContentRootPath;
+            string webPath = Directory.GetCurrentDirectory();
 
             // TODO: Pavan: Think of placing this json file in a better location
             if (Path.GetExtension(serviceAccountCredentialFilePath).ToLower() == ".json")

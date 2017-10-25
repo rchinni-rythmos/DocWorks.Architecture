@@ -1,5 +1,5 @@
-﻿using DocWorks.BuildingBlocks.EventBus.Abstractions;
-using DocWorks.BuildingBlocks.EventBus.Configuration;
+﻿using DocWorks.BuildingBlocks.Global.Abstractions;
+using DocWorks.BuildingBlocks.Global.Configuration;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;

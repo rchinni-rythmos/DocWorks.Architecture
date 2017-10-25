@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "velvety-ring-175512",
+  "private_key_id": "ba41e5383e7b8e9badfbc4b8df57225feb04a590",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDPZ5yvHTzzbwz3\nfnHfH3DXpo0QKArzR9IKUpYMYhR0qX1l2f3O79Gh+rs8Eem5ahC9f87xDgygrTpY\n0AdiB+yKlrKtblkqaSeOPRiK6UtOtRd9b+5HwxRuVKy9IGLjzSBZf9b/6xvdP3SQ\n7MrLZJNRKxAsDLSkcGPrRq7DnsGkUVbD/jaRMTTkbscDz7fF5XA3arfpnwZkCIF+\n/GlIELah080Ltw4Vrvg4CW1NzARpFd6ddnKV+al1q0kVIPRQPo4bxi0z6DD7kISz\nzLeDel5AsGRH6xqrEzYQnVlt4JlnkbXRuXiappcVbrD5LbNqHT6v2UjCaNYngBHQ\ncD3IUNdXAgMBAAECggEAAVps6UkvJp91qplTZ0Z7PZnDZEGYOku6ERss1qcLklJ9\nlCm+wDGyx0D6WI/9W5pXjzgp3EstLFDOoQzqbDdR0cdEVZSMvGKA2yq6FREkm3Go\nosbiLrgVIAspY8QcVEQrjxBVRMiYUljU197TpYDiFshJi+zUf0yROlQoIidp0aEI\nBoEHS8UO96IdTcVhhVMjQSilhirCsfp/6Jkz8P4UlvHNcmVVxWpZFkH0jxloeCU5\nPdVSCw7rcDPx9hspbFhPe9KhTG+Kqod1KLz80Fy862HQw8mHrfyc9WAQV6jGKrws\nRgnJpKpQad5eHT39D1RJ6E6Qw8ZiXEyf3SHy50O0YQKBgQDoX3Rrxq/AycLSGiFF\ntpbFzIHs9Y4SlefOPmSY6A9CCKTftU6iX6gL8jD3oCFpKK+jI/7VoddF3tqEg+0T\nGI4eQeKaC5rx2dm/PyOz1OGw3yqh0a84Sp+3KbS+9+LFAq9ceY1AgegcZjoXKx7z\nblH+N688gr8FqaG9lTNl5Q95qQKBgQDkfj/p7InfdE56m+uyS71vkYYy4Lzb5OGL\nzL1T+EypY05NukfAg+e60VCqsI9TMnQ/3uh69fPfcdOLD+55VzhSjiV6VQ9H8y50\n39uSj0D65jsx0Q7xRixIyY81VAkwaEXYnorDcKhHzllAPCe20B7OmeMAEjGEKyNw\nopBmIOpo/wKBgQDXwDEHFG4AkRRLISm9YX9x3aTQj1m/FeIpUzLx6ZypEf+LGfsN\ntcUAenlOoSYETlttHLGyRtbqr7SyDw+iiE0D+OZdYuMVJNEQyZ3rjX+TSlF594c5\nu8e5N4bzPJMXmpuZP96Pg04weBX9hvLw0IBeifMxOrADoPFkZdBYDiqlKQKBgQDT\nZT6KlM4GD5vf8cuBXHN5+kAXaDcyljJZ3eU3/9wlRvwWC4cAxMiq3abtFIa1qVNG\nGFwsDss+6heWa/ntB1XTgzGHWZTWs1VCyi1iDelHd6RCdbGGZa7o9Jnq88HAqGge\nfqfRI7R9IpsOQ9lWWHx4FoWe9jYbmrGiLrS72C4nTwKBgFQwaaofCEc1nwnBoJKS\nXA6rcIbtF5zQWeQl72u2skVt8fclfQf0BjFYeaTyBW39LcXh8LacI+DBrHLdpLot\nCc/J/P5vgS7AOU7DiD2Q2qlnVjHZ5uvapR0HsVwU4rJuMrMYfbgpuHGpAgwTNIP/\n/S3os9yILyk0zYxDUD48qRms\n-----END PRIVATE KEY-----\n",
+  "client_email": "serverauthaccount@velvety-ring-175512.iam.gserviceaccount.com",
+  "client_id": "113471744896426940039",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/serverauthaccount%40velvety-ring-175512.iam.gserviceaccount.com"
+}

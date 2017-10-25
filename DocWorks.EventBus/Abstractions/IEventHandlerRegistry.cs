@@ -1,4 +1,5 @@
-﻿using DocWorks.BuildingBlocks.Global.Enumerations;
+﻿using DocWorks.BuildingBlocks.EventBus.Enumerations;
+using DocWorks.BuildingBlocks.Global.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Text;
